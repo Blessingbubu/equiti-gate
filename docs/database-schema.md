@@ -2,284 +2,526 @@
 
 ## Overview
 
-The database stores users, investments, properties, transactions, rewards, and platform operations.
+The Equiti Gate database stores all information required to operate the global real estate ecosystem.
+
+The database must support:
+
+- Investors
+- Properties
+- Investments
+- Payments
+- Rewards
+- Withdrawals
+- Property operations
+- Platform management
 
 ---
 
-# Table 1: Users
+# 1. Users Table
 
-Stores investor accounts.
+## Purpose
 
-Fields:
+Stores all platform users.
 
-id
-- Unique user identifier
+## Fields
 
-full_name
-- Investor name
+### id
+Unique user identifier.
 
-email
-- Account email
+### full_name
+User's legal name.
 
-phone
-- Phone number
+### email
+User email address.
 
-country
-- Investor country
+### phone_number
+User phone number.
 
-password
-- Securely encrypted password
+### country
+User country.
 
-verification_status
+### password_hash
+Encrypted password.
+
+### account_type
+
+Possible values:
+
+- Investor
+- Property Owner
+- Administrator
+
+### verification_status
+
+Possible values:
+
 - Pending
 - Verified
-- Rejected
+- Suspended
 
-wallet_balance
-- Available funds
+### created_at
 
-created_at
-- Account creation date
+Account creation date.
 
----
+### updated_at
 
-# Table 2: Investment Plans
-
-Stores available investment tiers.
-
-Fields:
-
-id
-
-name
-
-minimum_amount
-
-maximum_investments_allowed
-
-roi_percentage
-
-investment_duration
-
-status
-
-Example:
-
-Bronze
-$15
-8%
-
-Silver
-$50
-11%
-
-Gold
-$150
-15%
+Last profile update.
 
 ---
 
-# Table 3: Investments
+# 2. Investment Plans Table
 
-Stores individual investments.
+## Purpose
 
-Fields:
+Stores available investment options.
 
-id
+## Fields
 
-user_id
+### id
 
-plan_id
+Unique plan identifier.
 
-amount
-
-start_date
-
-maturity_date
-
-expected_return
-
-status
-
-Possible statuses:
-
-Active
-Completed
-Withdrawn
-Cancelled
-
----
-
-# Table 4: Properties
-
-Stores real estate projects.
-
-Fields:
-
-id
-
-property_name
-
-country
-
-city
-
-property_type
-
-description
-
-images
-
-purchase_value
-
-funding_target
-
-current_funding
-
-status
-
-Possible statuses:
-
-Funding
-Construction
-Active Rental
-Completed
-
----
-
-# Table 5: Transactions
-
-Records money movement.
-
-Fields:
-
-id
-
-user_id
-
-transaction_type
-
-amount
-
-payment_method
-
-status
-
-created_at
-
-Types:
-
-Deposit
-Investment
-Withdrawal
-Reward
-
----
-
-# Table 6: Rewards
-
-Stores earned rewards.
-
-Fields:
-
-id
-
-user_id
-
-reward_type
-
-amount
-
-source
-
-created_at
+### name
 
 Examples:
 
-Advertisement reward
+- Foundation
+- Growth
+- Legacy
 
-Referral reward
+### minimum_amount
 
-Promotion reward
+Minimum investment required.
 
----
+### maximum_amount
 
-# Table 7: Withdrawals
+Maximum allowed investment.
 
-Handles withdrawal requests.
+### investment_limit
 
-Fields:
+Maximum number of active investments allowed per user.
 
-id
+### duration
 
-user_id
+Investment period.
 
-amount
+### return_structure
 
-method
+Defines how earnings are calculated.
 
-status
+### status
 
-requested_at
-
-processed_at
-
----
-
-# Table 8: Advertisements
-
-Stores reward advertisements.
-
-Fields:
-
-id
-
-title
-
-advertiser
-
-reward_amount
-
-daily_limit
-
-status
+Active or inactive.
 
 ---
 
-# Table 9: Ad Views
+# 3. Investments Table
 
-Tracks users watching advertisements.
+## Purpose
 
-Fields:
+Stores user investments.
 
-id
+## Fields
 
-user_id
+### id
 
-advert_id
+Investment identifier.
 
-completed
+### user_id
 
-reward_given
+Links investment to user.
 
-date
+### property_id
+
+Links investment to property.
+
+### plan_id
+
+Selected investment plan.
+
+### amount
+
+Amount invested.
+
+### start_date
+
+Investment start date.
+
+### end_date
+
+Investment completion date.
+
+### status
+
+Possible values:
+
+- Active
+- Completed
+- Cancelled
+
+### earnings
+
+Recorded earnings.
 
 ---
 
-# Table 10: Notifications
+# 4. Properties Table
 
-Stores user messages.
+## Purpose
 
-Fields:
+Stores real estate projects.
 
-id
+## Fields
 
-user_id
+### id
 
-title
+Property identifier.
 
-message
+### name
 
-read_status
+Property name.
 
-created_at
+### country
+
+Property country.
+
+### city
+
+Property location.
+
+### type
+
+Examples:
+
+- Airbnb
+- Apartment
+- Commercial
+
+### description
+
+Property details.
+
+### images
+
+Property photos.
+
+### investment_target
+
+Required funding amount.
+
+### current_funding
+
+Amount raised.
+
+### status
+
+Possible values:
+
+- Funding
+- Construction
+- Active
+- Completed
+
+---
+
+# 5. Wallets Table
+
+## Purpose
+
+Stores user financial balances.
+
+## Fields
+
+### id
+
+Wallet identifier.
+
+### user_id
+
+Wallet owner.
+
+### available_balance
+
+Available funds.
+
+### investment_balance
+
+Money currently invested.
+
+### reward_balance
+
+Earned rewards.
+
+### currency
+
+Examples:
+
+- USD
+- EUR
+- UGX
+
+---
+
+# 6. Transactions Table
+
+## Purpose
+
+Records all financial activity.
+
+## Fields
+
+### id
+
+Transaction identifier.
+
+### user_id
+
+User involved.
+
+### type
+
+Examples:
+
+- Deposit
+- Investment
+- Withdrawal
+- Reward
+
+### amount
+
+Transaction amount.
+
+### payment_method
+
+Examples:
+
+- Crypto
+- Mobile Money
+- Bank
+
+### status
+
+Possible values:
+
+- Pending
+- Completed
+- Failed
+
+### created_at
+
+Transaction date.
+
+---
+
+# 7. Withdrawals Table
+
+## Purpose
+
+Manages withdrawal requests.
+
+## Fields
+
+### id
+
+Withdrawal identifier.
+
+### user_id
+
+Requesting user.
+
+### amount
+
+Requested amount.
+
+### method
+
+Withdrawal method.
+
+### status
+
+Possible values:
+
+- Pending
+- Approved
+- Rejected
+- Completed
+
+### requested_at
+
+Request date.
+
+---
+
+# 8. Rewards Table
+
+## Purpose
+
+Stores user rewards.
+
+## Fields
+
+### id
+
+Reward identifier.
+
+### user_id
+
+Reward recipient.
+
+### type
+
+Examples:
+
+- Advertisement
+- Referral
+- Promotion
+
+### amount
+
+Reward value.
+
+### status
+
+Pending or credited.
+
+### created_at
+
+Reward date.
+
+---
+
+# 9. Advertisements Table
+
+## Purpose
+
+Stores advertisements available for users.
+
+## Fields
+
+### id
+
+Advertisement identifier.
+
+### title
+
+Advertisement name.
+
+### company
+
+Advertiser.
+
+### duration
+
+Viewing duration.
+
+### reward_amount
+
+Reward per completed view.
+
+### daily_limit
+
+Maximum views allowed.
+
+### status
+
+Active or inactive.
+
+---
+
+# 10. Advertisement Views Table
+
+## Purpose
+
+Tracks advertisement activity.
+
+## Fields
+
+### id
+
+Record identifier.
+
+### user_id
+
+Viewer.
+
+### advertisement_id
+
+Viewed advertisement.
+
+### completed
+
+Whether viewing was completed.
+
+### reward_given
+
+Whether reward was issued.
+
+### viewed_at
+
+View date.
+
+---
+
+# 11. Notifications Table
+
+## Purpose
+
+Stores platform messages.
+
+## Fields
+
+### id
+
+Notification identifier.
+
+### user_id
+
+Recipient.
+
+### title
+
+Notification title.
+
+### message
+
+Notification content.
+
+### read_status
+
+Read or unread.
+
+### created_at
+
+Date created.
+
+---
+
+# Database Relationships
+
+User:
+- Has many investments
+- Has one wallet
+- Has many transactions
+- Has many rewards
+- Has many notifications
+
+Property:
+- Has many investments
+
+Investment Plan:
+- Has many investments
+
+Advertisement:
+- Has many advertisement views
+
+---
+
+# Database Security Requirements
+
+The system must include:
+
+- User data protection
+- Access permissions
+- Encrypted sensitive information
+- Activity logging
+- Backup procedures
