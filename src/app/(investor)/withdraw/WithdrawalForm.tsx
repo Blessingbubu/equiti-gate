@@ -4,198 +4,105 @@ import { useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
 
-
 export default function WithdrawalForm({
-
   balance,
-  userId
-
-}:{
-
-  balance:number;
-  userId:string;
-
-}){
-
-
+  userId,
+}: {
+  balance: number;
+  userId: string;
+}) {
   const supabase = createClient();
-
   const router = useRouter();
 
-
-  const [amount,setAmount] =
-    useState("");
-
-  const [method,setMethod] =
-    useState("");
-
-  const [details,setDetails] =
-    useState("");
-
-  const [message,setMessage] =
-    useState("");
-
-  const [loading,setLoading] =
-    useState(false);
+  const [amount, setAmount] = useState("");
+  const [crypto, setCrypto] = useState("");
+  const [walletAddress, setWalletAddress] = useState("");
+  const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
 
 
+  async function submitWithdrawal() {
+
+    const withdrawalAmount = Number(amount);
 
 
-
-  async function submitWithdrawal(){
-
-
-    const withdrawalAmount =
-      Number(amount);
-
-
-
-
-    if(!withdrawalAmount){
-
-      setMessage(
-        "Enter withdrawal amount"
-      );
-
+    if (!withdrawalAmount) {
+      setMessage("Enter withdrawal amount");
       return;
-
     }
 
 
-
-
-
-    if(withdrawalAmount <= 0){
-
-      setMessage(
-        "Invalid withdrawal amount"
-      );
-
+    if (withdrawalAmount <= 0) {
+      setMessage("Invalid withdrawal amount");
       return;
-
     }
 
 
-
-
-
-    if(withdrawalAmount > balance){
-
-      setMessage(
-        "Insufficient wallet balance"
-      );
-
+    if (withdrawalAmount > balance) {
+      setMessage("Insufficient wallet balance");
       return;
-
     }
 
 
-
-
-
-    if(!method){
-
-      setMessage(
-        "Enter payment method"
-      );
-
+    if (!crypto) {
+      setMessage("Select cryptocurrency");
       return;
-
     }
 
 
-
-
-
-    if(!details){
-
-      setMessage(
-        "Enter account details"
-      );
-
+    if (!walletAddress) {
+      setMessage("Enter wallet address");
       return;
-
     }
-
-
-
 
 
     setLoading(true);
-
     setMessage("");
 
 
 
-
-
-    const {
-      error
-    } =
-    await supabase
+    const { error } = await supabase
       .from("withdrawals")
       .insert({
 
-        user_id:
-          userId,
+        user_id: userId,
 
-        amount:
-          withdrawalAmount,
+        amount: withdrawalAmount,
 
-        payment_method:
-          method,
+        payment_method: crypto,
 
-        account_details:
-          details,
+        account_details: walletAddress,
 
-        status:
-          "Pending"
+        status: "Pending"
 
       });
 
 
 
-
-
-
-
     if(error){
 
-      setMessage(
-        error.message
-      );
-
+      setMessage(error.message);
       setLoading(false);
-
       return;
 
     }
 
 
 
-
-
     setMessage(
-      "Withdrawal request submitted successfully"
+      "Crypto withdrawal request submitted successfully"
     );
-
-
-
 
 
     setTimeout(()=>{
 
       router.push("/wallet");
-
       router.refresh();
 
     },1500);
 
 
-
   }
-
-
 
 
 
@@ -204,14 +111,11 @@ export default function WithdrawalForm({
     <div className="mt-6 space-y-4">
 
 
-
-
-
       <input
 
         type="number"
 
-        placeholder="Withdrawal Amount"
+        placeholder="Withdrawal Amount (USD)"
 
         value={amount}
 
@@ -225,25 +129,44 @@ export default function WithdrawalForm({
 
 
 
+      <select
 
-
-
-
-      <input
-
-        placeholder="Payment Method (e.g Mobile Money)"
-
-        value={method}
+        value={crypto}
 
         onChange={(e)=>
-          setMethod(e.target.value)
+          setCrypto(e.target.value)
         }
 
         className="w-full rounded-lg border p-3"
 
-      />
+      >
+
+        <option value="">
+          Select Crypto Network
+        </option>
 
 
+        <option value="USDT TRC20">
+          USDT (TRC20)
+        </option>
+
+
+        <option value="USDT ERC20">
+          USDT (ERC20)
+        </option>
+
+
+        <option value="Bitcoin">
+          Bitcoin (BTC)
+        </option>
+
+
+        <option value="Ethereum">
+          Ethereum (ETH)
+        </option>
+
+
+      </select>
 
 
 
@@ -251,20 +174,19 @@ export default function WithdrawalForm({
 
       <textarea
 
-        placeholder="Account details"
+        placeholder="Crypto Wallet Address"
 
-        value={details}
+        value={walletAddress}
 
         onChange={(e)=>
-          setDetails(e.target.value)
+          setWalletAddress(e.target.value)
         }
 
         className="w-full rounded-lg border p-3"
 
+        rows={4}
+
       />
-
-
-
 
 
 
@@ -285,13 +207,11 @@ export default function WithdrawalForm({
           ?
           "Submitting..."
           :
-          "Request Withdrawal"
+          "Request Crypto Withdrawal"
         }
 
 
       </button>
-
-
 
 
 
@@ -308,9 +228,6 @@ export default function WithdrawalForm({
 
         )
       }
-
-
-
 
 
     </div>
