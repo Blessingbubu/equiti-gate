@@ -1,12 +1,12 @@
-# Equiti Gate MVP Feature List
+# Equiti Gates MVP Feature List
 
 ## Overview
 
-The MVP represents the first public version of Equiti Gate.
+The MVP represents the first public version of Equiti Gates.
 
 The goal is to create a functional platform where users can:
 
-- Learn about Equiti Gate
+- Learn about Equiti Gates
 - Create accounts
 - Explore properties
 - View investment opportunities
@@ -19,7 +19,7 @@ The MVP will focus on building trust, user experience, and platform foundations.
 
 # MVP Goal
 
-Create the first working version of Equiti Gate that demonstrates the complete user journey.
+Create the first working version of Equiti Gates that demonstrates the complete user journey.
 
 User journey:
 
@@ -45,7 +45,7 @@ Required:
 
 - Hero section
 - Company introduction
-- How Equiti Gate works
+- How Equiti Gates works
 - Investment explanation
 - Featured properties
 - Trust section

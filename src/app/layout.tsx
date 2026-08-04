@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Equiti Gate",
+  title: "Equiti Gates",
   description:
     "Global real estate investment platform making property investment accessible worldwide.",
 };

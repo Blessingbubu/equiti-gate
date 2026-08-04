@@ -1,8 +1,8 @@
-# Equiti Gate Development Roadmap
+# Equiti Gates Development Roadmap
 
 ## Overview
 
-This roadmap defines the development stages required to build Equiti Gate from the initial platform into a global real estate ecosystem.
+This roadmap defines the development stages required to build Equiti Gates from the initial platform into a global real estate ecosystem.
 
 Development will happen in controlled phases to ensure stability, security, and scalability.
 
@@ -12,7 +12,7 @@ Development will happen in controlled phases to ensure stability, security, and 
 
 ## Goal
 
-Create the first complete Equiti Gate platform.
+Create the first complete Equiti Gates platform.
 
 ## Features
 
@@ -194,7 +194,7 @@ Add:
 
 ## Goal
 
-Make Equiti Gate a worldwide platform.
+Make Equiti Gates a worldwide platform.
 
 ## Features
 
@@ -230,7 +230,7 @@ Explore:
 
 # Development Principles
 
-Equiti Gate will prioritize:
+Equiti Gates will prioritize:
 
 ## Security
 

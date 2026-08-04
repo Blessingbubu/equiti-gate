@@ -6,7 +6,7 @@ export default function RegisterPage() {
       <div className="w-full max-w-md space-y-6">
         <div>
           <h1 className="text-3xl font-bold">
-            Create Your Equiti Gate Account
+            Create Your Equiti Gates Account
           </h1>
 
           <p className="text-muted-foreground mt-2">

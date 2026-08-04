@@ -1,8 +1,8 @@
-# Equiti Gate System Architecture
+# Equiti Gates System Architecture
 
 ## Overview
 
-Equiti Gate will be built as a scalable global real estate ecosystem.
+Equiti Gates will be built as a scalable global real estate ecosystem.
 
 The system will consist of:
 
@@ -228,7 +228,7 @@ For larger investments.
 
 # Security Architecture
 
-Equiti Gate will implement:
+Equiti Gates will implement:
 
 - Encrypted passwords
 - Secure authentication

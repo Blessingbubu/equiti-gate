@@ -1,80 +1,28 @@
 "use client";
 
 import { useState } from "react";
-import { createInvestment } from "../../(investor)/properties/actions";
+import InvestmentModal from "@/components/investment/InvestmentModal";
 
 
 export default function InvestButton({
 
   propertyId,
   minimumInvestment,
+  propertyName,
+  location,
 
 }:{
 
   propertyId:string;
   minimumInvestment:number;
+  propertyName:string;
+  location:string;
 
 }){
 
 
-  const [loading,setLoading] =
+  const [open,setOpen] =
     useState(false);
-
-
-  const [error,setError] =
-    useState("");
-
-
-
-
-
-  async function handleInvest(){
-
-
-    setLoading(true);
-    setError("");
-
-
-
-    try{
-
-
-      await createInvestment(
-
-        propertyId,
-
-        minimumInvestment
-
-      );
-
-
-
-      window.location.href =
-        "/dashboard";
-
-
-
-    }catch(err:any){
-
-
-      setError(
-        err.message ||
-        "Investment failed"
-      );
-
-
-    }
-
-
-    setLoading(false);
-
-
-  }
-
-
-
-
-
 
 
 
@@ -83,47 +31,54 @@ export default function InvestButton({
     <div className="mt-6">
 
 
-      {
-        error && (
-
-          <p className="mb-3 text-red-600">
-
-            {error}
-
-          </p>
-
-        )
-      }
-
-
-
-
-
-
       <button
 
+        onClick={() =>
+          setOpen(true)
+        }
 
-        onClick={handleInvest}
-
-
-        disabled={loading}
-
-
-        className="rounded-lg bg-emerald-700 px-6 py-3 font-semibold text-white disabled:opacity-50"
-
+        className="
+        rounded-lg
+        bg-emerald-700
+        px-6
+        py-3
+        font-semibold
+        text-white
+        hover:bg-emerald-800
+        "
 
       >
 
-        {
-          loading
-          ?
-          "Processing..."
-          :
-          "Invest Now"
-        }
+        Invest Now
 
 
       </button>
+
+
+
+
+
+      {
+        open && (
+
+          <InvestmentModal
+
+            propertyId={propertyId}
+
+            minimumInvestment={minimumInvestment}
+
+            propertyName={propertyName}
+
+            location={location}
+
+            onClose={() =>
+              setOpen(false)
+            }
+
+          />
+
+        )
+      }
 
 
 

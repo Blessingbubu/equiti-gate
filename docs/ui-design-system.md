@@ -1,8 +1,8 @@
-# Equiti Gate UI/UX Design System
+# Equiti Gates UI/UX Design System
 
 ## Overview
 
-This document defines the visual identity, user interface principles, and design standards for Equiti Gate.
+This document defines the visual identity, user interface principles, and design standards for Equiti Gates.
 
 The goal is to create a premium, trustworthy, modern real estate experience.
 
@@ -12,7 +12,7 @@ The goal is to create a premium, trustworthy, modern real estate experience.
 
 ## Brand Name
 
-Equiti Gate
+Equiti Gates
 
 ## Meaning
 
@@ -22,7 +22,7 @@ Gate represents access to opportunities that were previously difficult to reach.
 
 Together:
 
-Equiti Gate is a gateway to global real estate opportunities.
+Equiti Gates is a gateway to global real estate opportunities.
 
 ---
 
@@ -163,7 +163,7 @@ Body text:
 
 Contains:
 
-- Equiti Gate logo
+- Equiti Gates logo
 - Home
 - Properties
 - Investment

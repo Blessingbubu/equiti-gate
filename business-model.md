@@ -1,4 +1,4 @@
-# Equiti Gate Business Model
+# Equiti Gates Business Model
 
 ## Mission
 
@@ -12,9 +12,9 @@ To become one of the world's most trusted real estate investment platforms, enab
 
 ---
 
-# How Equiti Gate Works
+# How Equiti Gates Works
 
-Equiti Gate pools investments from individuals around the world.
+Equiti Gates pools investments from individuals around the world.
 
 The company uses these funds to acquire, develop, and manage carefully selected real estate projects, including Airbnb properties, residential apartments, and commercial buildings.
 
@@ -62,7 +62,7 @@ Designed for experienced investors.
 
 # Property Strategy
 
-Equiti Gate will focus on:
+Equiti Gates will focus on:
 
 - Airbnb properties
 - Holiday homes
@@ -87,7 +87,7 @@ The company generates income through:
 
 # Transparency
 
-Equiti Gate is committed to transparency by providing investors with access to:
+Equiti Gates is committed to transparency by providing investors with access to:
 
 - Property information
 - Investment performance

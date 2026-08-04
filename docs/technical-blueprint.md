@@ -1,8 +1,8 @@
-# Equiti Gate Technical Blueprint
+# Equiti Gates Technical Blueprint
 
 ## 1. Platform Overview
 
-Equiti Gate is a global real estate investment platform connecting investors with property investment opportunities.
+Equiti Gates is a global real estate investment platform connecting investors with property investment opportunities.
 
 The platform will allow users to:
 - Register accounts
@@ -169,7 +169,7 @@ Stores:
 
 # 5. Security
 
-Equiti Gate will include:
+Equiti Gates will include:
 
 - Secure authentication
 - Encrypted passwords

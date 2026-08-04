@@ -70,7 +70,7 @@ export default async function NotificationHistory() {
 
       <p className="mt-1 text-sm text-gray-500">
 
-        Latest notifications sent through Equiti Gate.
+        Latest notifications sent through Equiti Gates.
 
       </p>
 

@@ -76,7 +76,7 @@ export default async function VerificationPage(){
 
         <p className="mt-2 text-gray-500">
 
-          Submit your details and identity document to verify your Equiti Gate account.
+          Submit your details and identity document to verify your Equiti Gates account.
 
         </p>
 

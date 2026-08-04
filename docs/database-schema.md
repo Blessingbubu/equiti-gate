@@ -1,8 +1,8 @@
-# Equiti Gate Database Schema
+# Equiti Gates Database Schema
 
 ## Overview
 
-The Equiti Gate database stores all information required to operate the global real estate ecosystem.
+The Equiti Gates database stores all information required to operate the global real estate ecosystem.
 
 The database must support:
 

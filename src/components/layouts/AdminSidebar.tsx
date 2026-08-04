@@ -56,7 +56,7 @@ export default function AdminSidebar(){
 
       <h1 className="text-2xl font-bold text-emerald-700">
 
-        EQUITI GATE
+        Equiti Gates
 
       </h1>
 

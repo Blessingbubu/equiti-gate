@@ -1,11 +1,13 @@
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
+import PropertyForm from "@/components/admin/PropertyForm";
 
 
 export default async function NewPropertyPage() {
 
 
-  const supabase = await createClient();
+  const supabase =
+    await createClient();
 
 
 
@@ -13,13 +15,16 @@ export default async function NewPropertyPage() {
     data:{
       user
     }
-  } = await supabase.auth.getUser();
+  } =
+  await supabase.auth.getUser();
 
 
 
 
   if(!user){
+
     redirect("/login");
+
   }
 
 
@@ -28,7 +33,8 @@ export default async function NewPropertyPage() {
 
   const {
     data:profile
-  } = await supabase
+  } =
+  await supabase
     .from("profiles")
     .select("role")
     .eq(
@@ -45,93 +51,10 @@ export default async function NewPropertyPage() {
     !profile ||
     profile.role !== "admin"
   ){
+
     redirect("/dashboard");
-  }
-
-
-
-
-
-
-  async function createProperty(
-    formData: FormData
-  ){
-
-    "use server";
-
-
-
-    const supabase =
-      await createClient();
-
-
-
-
-    await supabase
-      .from("properties")
-      .insert({
-
-        title:
-          formData.get("title"),
-
-
-        description:
-          formData.get("description"),
-
-
-        country:
-          formData.get("country"),
-
-
-        city:
-          formData.get("city"),
-
-
-        image_url:
-          formData.get("image_url"),
-
-
-        total_value:
-          Number(
-            formData.get("total_value")
-          ),
-
-
-        minimum_investment:
-          Number(
-            formData.get("minimum_investment")
-          ),
-
-
-        expected_roi:
-          Number(
-            formData.get("expected_roi")
-          ),
-
-
-        funding_goal:
-          Number(
-            formData.get("funding_goal")
-          ),
-
-
-        amount_raised:
-          0,
-
-
-        status:
-          "Active"
-
-      });
-
-
-
-
-
-    redirect("/admin");
 
   }
-
 
 
 
@@ -139,7 +62,6 @@ export default async function NewPropertyPage() {
 
 
   return (
-
 
     <main className="min-h-screen bg-gray-100 p-8">
 
@@ -154,158 +76,22 @@ export default async function NewPropertyPage() {
         </h1>
 
 
+        <p className="mt-2 text-gray-500">
 
+          Upload property details and images.
 
-        <form
-          action={createProperty}
-          className="mt-8 space-y-5"
-        >
+        </p>
 
 
 
 
-
-          <input
-            name="title"
-            placeholder="Property title"
-            className="w-full rounded-lg border p-3"
-            required
-          />
-
-
-
-
-
-
-          <textarea
-            name="description"
-            placeholder="Property description"
-            className="w-full rounded-lg border p-3"
-            rows={5}
-            required
-          />
-
-
-
-
-
-
-
-          <input
-            name="country"
-            placeholder="Country"
-            className="w-full rounded-lg border p-3"
-            required
-          />
-
-
-
-
-
-
-          <input
-            name="city"
-            placeholder="City"
-            className="w-full rounded-lg border p-3"
-            required
-          />
-
-
-
-
-
-
-
-          <input
-            name="image_url"
-            placeholder="Image URL"
-            className="w-full rounded-lg border p-3"
-          />
-
-
-
-
-
-
-
-          <input
-            name="total_value"
-            type="number"
-            placeholder="Property total value"
-            className="w-full rounded-lg border p-3"
-            required
-          />
-
-
-
-
-
-
-
-          <input
-            name="minimum_investment"
-            type="number"
-            placeholder="Minimum investment"
-            className="w-full rounded-lg border p-3"
-            required
-          />
-
-
-
-
-
-
-
-          <input
-            name="expected_roi"
-            type="number"
-            placeholder="Expected ROI %"
-            className="w-full rounded-lg border p-3"
-            required
-          />
-
-
-
-
-
-
-
-          <input
-            name="funding_goal"
-            type="number"
-            placeholder="Funding goal"
-            className="w-full rounded-lg border p-3"
-            required
-          />
-
-
-
-
-
-
-
-
-          <button
-            className="w-full rounded-lg bg-emerald-700 py-3 font-semibold text-white"
-          >
-
-            Create Property
-
-          </button>
-
-
-
-
-
-        </form>
-
+        <PropertyForm />
 
 
       </div>
 
 
     </main>
-
 
   );
 

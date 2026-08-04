@@ -1,8 +1,8 @@
-# Equiti Gate API Design
+# Equiti Gates API Design
 
 ## Overview
 
-The Equiti Gate API connects the website, mobile applications, database, payment systems, and administrative tools.
+The Equiti Gates API connects the website, mobile applications, database, payment systems, and administrative tools.
 
 The API controls:
 
@@ -22,7 +22,7 @@ The API controls:
 
 Purpose:
 
-Creates a new Equiti Gate account.
+Creates a new Equiti Gates account.
 
 Information required:
 

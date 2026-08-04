@@ -1,8 +1,8 @@
-# Equiti Gate Brand Guide
+# Equiti Gates Brand Guide
 
 ## Overview
 
-This document defines the identity, communication style, and visual direction of Equiti Gate.
+This document defines the identity, communication style, and visual direction of Equiti Gates.
 
 The purpose is to create a trusted global real estate brand that represents opportunity, transparency, and shared growth.
 
@@ -10,7 +10,7 @@ The purpose is to create a trusted global real estate brand that represents oppo
 
 # Brand Name
 
-## Equiti Gate
+## Equiti Gates
 
 ## Meaning
 
@@ -33,7 +33,7 @@ Represents:
 
 Together:
 
-Equiti Gate represents a gateway that allows more people to access global real estate opportunities.
+Equiti Gates represents a gateway that allows more people to access global real estate opportunities.
 
 ---
 
@@ -88,7 +88,7 @@ Create opportunities for investors, property owners, and communities.
 
 # Brand Personality
 
-Equiti Gate should feel:
+Equiti Gates should feel:
 
 - Professional
 - Reliable
@@ -232,7 +232,7 @@ Worldwide real estate ecosystem.
 
 # Design Principles
 
-Every Equiti Gate product should be:
+Every Equiti Gates product should be:
 
 ## Simple
 

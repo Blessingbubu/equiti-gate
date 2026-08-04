@@ -1,43 +1,115 @@
-import { createClient } from "@/lib/supabase/server";
+import { createAdminClient } from "@/lib/supabase/admin";
 import { settleCompletedInvestments } from "./settleInvestment";
+
 
 
 export async function checkInvestmentMaturity(
   userId: string
 ) {
 
-  const supabase = await createClient();
+
+  const supabase =
+    createAdminClient();
+
+
+
+
+  console.log(
+    "CHECKING MATURITY FOR USER:",
+    userId
+  );
+
+
 
 
 
   const {
     data: investments,
-    error,
+    error
+
   } =
   await supabase
+
     .from("investments")
+
     .select(
-      "id,start_date,duration_days,status"
+      `
+      id,
+      property_name,
+      maturity_date,
+      status,
+      settled
+      `
     )
+
     .eq(
       "user_id",
       userId
     )
+
     .eq(
       "status",
       "Active"
+    )
+
+    .eq(
+      "settled",
+      false
     );
 
 
 
-  if(
-    error ||
-    !investments
-  ){
+
+
+
+
+  if(error){
+
+
+    console.log(
+      "MATURITY FETCH ERROR:",
+      error
+    );
+
 
     return;
 
   }
+
+
+
+
+
+
+
+  console.log(
+    "ACTIVE INVESTMENTS FOR MATURITY:",
+    investments
+  );
+
+
+
+
+
+
+
+  if(
+    !investments ||
+    investments.length === 0
+  ){
+
+
+    console.log(
+      "NO ACTIVE INVESTMENTS TO CHECK"
+    );
+
+
+    return;
+
+  }
+
+
+
 
 
 
@@ -50,25 +122,32 @@ export async function checkInvestmentMaturity(
 
 
 
+
+
   for(
     const investment of investments
   ){
 
 
+
     const maturityDate =
       new Date(
-        investment.start_date
+        investment.maturity_date
       );
 
 
 
-    maturityDate.setDate(
-      maturityDate.getDate()
-      +
-      Number(
-        investment.duration_days || 14
-      )
+
+
+    console.log(
+      "CHECKING:",
+      investment.property_name,
+      "MATURITY:",
+      maturityDate,
+      "TODAY:",
+      today
     );
+
 
 
 
@@ -81,14 +160,32 @@ export async function checkInvestmentMaturity(
 
 
 
+      console.log(
+        "MATURITY REACHED:",
+        investment.property_name
+      );
+
+
+
+
+
+
+      const {
+        error:updateError
+      } =
+
       await supabase
+
         .from("investments")
+
         .update({
 
           status:
             "Completed"
 
+
         })
+
         .eq(
           "id",
           investment.id
@@ -96,7 +193,45 @@ export async function checkInvestmentMaturity(
 
 
 
+
+
+
+      if(updateError){
+
+
+        console.log(
+          "MATURITY UPDATE ERROR:",
+          updateError
+        );
+
+
+      }
+      else{
+
+
+        console.log(
+          "MARKED COMPLETED:",
+          investment.property_name
+        );
+
+
+      }
+
+
+
     }
+
+    else{
+
+
+      console.log(
+        "NOT MATURE:",
+        investment.property_name
+      );
+
+
+    }
+
 
 
 
@@ -106,12 +241,14 @@ export async function checkInvestmentMaturity(
 
 
 
-  // After marking completed,
-  // release funds to wallet
+
+
 
   await settleCompletedInvestments(
     userId
   );
+
+
 
 
 }

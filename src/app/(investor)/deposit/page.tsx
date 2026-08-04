@@ -50,7 +50,7 @@ export default async function DepositPage(){
 
 
         <p className="mt-2 text-gray-500">
-          Deposit USDT to your Equiti Gate wallet.
+          Deposit USDT to your Equiti Gates wallet.
         </p>
 
 

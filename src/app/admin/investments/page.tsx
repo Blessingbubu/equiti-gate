@@ -115,7 +115,7 @@ export default async function AdminPage() {
         <div className="mb-8">
 
           <h1 className="text-4xl font-bold">
-            Equiti Gate Admin
+            Equiti Gates Admin
           </h1>
 
           <p className="mt-2 text-gray-600">

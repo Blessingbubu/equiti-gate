@@ -87,7 +87,7 @@ export default async function NotificationsPage() {
 
         <p className="mt-2 text-gray-500">
 
-          Your latest Equiti Gate updates.
+          Your latest Equiti Gates updates.
 
         </p>
 

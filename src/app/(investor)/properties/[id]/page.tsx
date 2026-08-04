@@ -1,6 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 import { notFound } from "next/navigation";
-import Link from "next/link";
+import InvestButton from "@/app/(investor)/properties/components/InvestButton";
 
 export default async function PropertyDetailsPage({
   params,
@@ -147,12 +147,21 @@ export default async function PropertyDetailsPage({
 
 
 
-        <Link
-          href={`/invest/${property.id}`}
-          className="mt-8 block rounded-lg bg-emerald-700 py-4 text-center text-white"
-        >
-          Invest Now
-        </Link>
+        <div className="mt-8">
+
+  <InvestButton
+
+    propertyId={property.id}
+
+    minimumInvestment={property.minimum_investment}
+
+    propertyName={property.title}
+
+    location={`${property.city}, ${property.country}`}
+
+  />
+
+</div>
 
 
       </section>

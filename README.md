@@ -1,8 +1,8 @@
-# Equiti Gate
+# Equiti Gates
 
 ## Global Real Estate Investment Platform
 
-Equiti Gate is a global real estate investment platform designed to make property investment accessible to people worldwide.
+Equiti Gates is a global real estate investment platform designed to make property investment accessible to people worldwide.
 
 Our mission is to allow individuals to participate in real estate opportunities through affordable investment options while providing transparency, portfolio tracking, and access to global property projects.
 
@@ -12,7 +12,7 @@ To become a trusted global gateway where people can collectively invest in real 
 
 ## Platform Concept
 
-Equiti Gate connects investors with carefully selected real estate opportunities including:
+Equiti Gates connects investors with carefully selected real estate opportunities including:
 
 - Airbnb properties
 - Residential developments
@@ -38,7 +38,7 @@ Users will be able to:
 
 ## Investment Options
 
-Equiti Gate will provide multiple investment levels designed for different investor profiles.
+Equiti Gates will provide multiple investment levels designed for different investor profiles.
 
 ### Tier One
 Minimum investment:
@@ -68,7 +68,7 @@ The platform will provide transparency through:
 
 ## Technology Stack
 
-Equiti Gate will be built using modern technologies:
+Equiti Gates will be built using modern technologies:
 
 - Next.js
 - React

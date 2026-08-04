@@ -1,8 +1,8 @@
-# Equiti Gate User Journeys
+# Equiti Gates User Journeys
 
 ## Overview
 
-This document describes how different users interact with the Equiti Gate ecosystem.
+This document describes how different users interact with the Equiti Gates ecosystem.
 
 ---
 
@@ -10,7 +10,7 @@ This document describes how different users interact with the Equiti Gate ecosys
 
 ## Step 1: Landing on Website
 
-A visitor arrives at Equiti Gate.
+A visitor arrives at Equiti Gates.
 
 They can view:
 
@@ -199,7 +199,7 @@ Administrator can:
 
 # User Experience Principles
 
-Equiti Gate should provide:
+Equiti Gates should provide:
 
 - Simple navigation
 - Clear information

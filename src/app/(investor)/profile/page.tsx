@@ -86,7 +86,7 @@ export default async function ProfilePage() {
 
         <p className="mt-2 text-gray-500">
 
-          Manage your Equiti Gate account information
+          Manage your Equiti Gates account information
 
         </p>
 

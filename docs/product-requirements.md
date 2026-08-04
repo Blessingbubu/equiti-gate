@@ -1,8 +1,8 @@
-# Equiti Gate Product Requirements Document (PRD)
+# Equiti Gates Product Requirements Document (PRD)
 
 ## Product Name
 
-Equiti Gate
+Equiti Gates
 
 ## Tagline
 
@@ -12,7 +12,7 @@ Building Wealth Through Real Estate
 
 # Product Overview
 
-Equiti Gate is a global real estate ecosystem that enables individuals to invest in professionally managed real estate projects, monitor their investments, and participate in long-term wealth creation.
+Equiti Gates is a global real estate ecosystem that enables individuals to invest in professionally managed real estate projects, monitor their investments, and participate in long-term wealth creation.
 
 The platform will expand over time to include property investment, Airbnb management, property sales, rentals, and property management services.
 
@@ -36,7 +36,7 @@ The platform will expand over time to include property investment, Airbnb manage
 Can:
 - Browse the website
 - View properties
-- Learn about Equiti Gate
+- Learn about Equiti Gates
 - Create an account
 
 ---

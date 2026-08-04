@@ -1,8 +1,8 @@
-# Equiti Gate Application Structure
+# Equiti Gates Application Structure
 
 ## Overview
 
-This document defines the structure, pages, navigation, and user interface sections of the Equiti Gate platform.
+This document defines the structure, pages, navigation, and user interface sections of the Equiti Gates platform.
 
 The platform consists of:
 
@@ -15,7 +15,7 @@ The platform consists of:
 
 # 1. Public Website
 
-The public website introduces Equiti Gate to visitors and potential investors.
+The public website introduces Equiti Gates to visitors and potential investors.
 
 ---
 
@@ -23,7 +23,7 @@ The public website introduces Equiti Gate to visitors and potential investors.
 
 Purpose:
 
-Introduce Equiti Gate and explain the platform.
+Introduce Equiti Gates and explain the platform.
 
 Sections:
 

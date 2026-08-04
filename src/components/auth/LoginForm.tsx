@@ -94,7 +94,7 @@ export default function LoginForm() {
 
       description:
 
-        "Welcome back to Equiti Gate.",
+        "Welcome back to Equiti Gates.",
 
     });
 

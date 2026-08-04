@@ -114,7 +114,7 @@ export default async function AdminNotificationsPage() {
 
         <p className="mt-2 text-gray-500">
 
-          Send announcements and updates to Equiti Gate investors.
+          Send announcements and updates to Equiti Gates investors.
 
         </p>
 

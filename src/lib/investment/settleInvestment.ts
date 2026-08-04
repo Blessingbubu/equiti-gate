@@ -1,4 +1,5 @@
-import { createClient } from "@/lib/supabase/server";
+import { createAdminClient } from "@/lib/supabase/admin";
+
 
 
 export async function settleCompletedInvestments(
@@ -7,13 +8,14 @@ export async function settleCompletedInvestments(
 
 
   const supabase =
-    await createClient();
+    createAdminClient();
 
 
 
 
 
-  // Find completed investments not yet settled
+
+  // Find completed investments not settled
 
   const {
     data: investments,
@@ -21,16 +23,21 @@ export async function settleCompletedInvestments(
 
   } =
   await supabase
+
     .from("investments")
+
     .select("*")
+
     .eq(
       "user_id",
       userId
     )
+
     .eq(
       "status",
       "Completed"
     )
+
     .eq(
       "settled",
       false
@@ -40,8 +47,27 @@ export async function settleCompletedInvestments(
 
 
 
+
+
   if(
-    investmentError ||
+    investmentError
+  ){
+
+    console.log(
+      "SETTLEMENT FETCH ERROR:",
+      investmentError
+    );
+
+    return;
+
+  }
+
+
+
+
+
+
+  if(
     !investments ||
     investments.length === 0
   ){
@@ -57,21 +83,25 @@ export async function settleCompletedInvestments(
 
 
 
-  // Get wallet
-
   const {
     data: wallet,
     error: walletError
 
   } =
   await supabase
+
     .from("wallets")
+
     .select("*")
+
     .eq(
       "user_id",
       userId
     )
+
     .single();
+
+
 
 
 
@@ -81,6 +111,11 @@ export async function settleCompletedInvestments(
     walletError ||
     !wallet
   ){
+
+    console.log(
+      "WALLET FETCH ERROR:",
+      walletError
+    );
 
     return;
 
@@ -94,13 +129,17 @@ export async function settleCompletedInvestments(
 
 
   let newBalance =
+
     Number(
       wallet.balance || 0
     );
 
 
 
+
+
   let totalProfit =
+
     Number(
       wallet.total_profit || 0
     );
@@ -119,7 +158,8 @@ export async function settleCompletedInvestments(
 
 
 
-    const principal =
+    const amount =
+
       Number(
         investment.amount || 0
       );
@@ -127,6 +167,7 @@ export async function settleCompletedInvestments(
 
 
     const totalReturn =
+
       Number(
         investment.total_return || 0
       );
@@ -134,26 +175,9 @@ export async function settleCompletedInvestments(
 
 
     const profit =
+
       totalReturn -
-      principal;
-
-
-
-
-
-
-
-    // Add full return to wallet
-
-    newBalance =
-      newBalance +
-      totalReturn;
-
-
-
-    totalProfit =
-      totalProfit +
-      profit;
+      amount;
 
 
 
@@ -162,16 +186,29 @@ export async function settleCompletedInvestments(
 
 
 
+    newBalance += totalReturn;
 
-    // Mark investment settled
+
+    totalProfit += profit;
+
+
+
+
+
+
+
+
 
     await supabase
+
       .from("investments")
+
       .update({
 
         settled:true
 
       })
+
       .eq(
         "id",
         investment.id
@@ -185,29 +222,28 @@ export async function settleCompletedInvestments(
 
 
 
-    // Create principal transaction
-
     await supabase
+
       .from("transactions")
+
       .insert({
 
         user_id:userId,
 
-        type:
-          "Investment Return",
+
+        type:"Investment Return",
 
 
         description:
-          `${investment.property_name} principal returned`,
+          `${investment.property_name} total return paid`,
 
 
         amount:
-          principal,
+          totalReturn,
 
 
         status:
           "Completed"
-
 
       });
 
@@ -219,35 +255,16 @@ export async function settleCompletedInvestments(
 
 
 
-    // Create profit transaction
+    console.log(
 
-    await supabase
-      .from("transactions")
-      .insert({
+      "INVESTMENT SETTLED:",
 
-        user_id:userId,
+      investment.property_name,
 
+      "RETURN:",
+      totalReturn
 
-        type:
-          "Investment Profit",
-
-
-        description:
-          `${investment.property_name} investment profit`,
-
-
-        amount:
-          profit,
-
-
-        status:
-          "Completed"
-
-
-      });
-
-
-
+    );
 
 
 
@@ -261,10 +278,10 @@ export async function settleCompletedInvestments(
 
 
 
-  // Update wallet
-
   await supabase
+
     .from("wallets")
+
     .update({
 
       balance:
@@ -276,17 +293,27 @@ export async function settleCompletedInvestments(
 
 
       updated_at:
-        new Date()
-        .toISOString()
+        new Date().toISOString()
 
 
     })
+
     .eq(
       "user_id",
       userId
     );
 
 
+
+
+
+
+
+  console.log(
+
+    "SETTLEMENT COMPLETE"
+
+  );
 
 
 }

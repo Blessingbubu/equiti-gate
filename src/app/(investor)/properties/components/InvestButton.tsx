@@ -1,76 +1,28 @@
 "use client";
 
 import { useState } from "react";
-import { createInvestment } from "../actions";
+import InvestmentModal from "@/components/investment/InvestmentModal";
 
 
 export default function InvestButton({
 
   propertyId,
   minimumInvestment,
+  propertyName,
+  location,
 
 }:{
 
   propertyId:string;
   minimumInvestment:number;
+  propertyName:string;
+  location:string;
 
 }){
 
 
-  const [loading,setLoading] = useState(false);
-
-  const [error,setError] = useState("");
-
-
-
-
-  async function handleInvest(){
-
-
-    setLoading(true);
-
-    setError("");
-
-
-
-    try{
-
-
-      await createInvestment(
-
-        propertyId,
-
-        minimumInvestment
-
-      );
-
-
-      window.location.href =
-        "/dashboard";
-
-
-
-    }catch(err:any){
-
-
-      setError(
-        err.message ||
-        "Investment failed"
-      );
-
-
-    }
-
-
-
-    setLoading(false);
-
-
-  }
-
-
-
-
+  const [open,setOpen] =
+    useState(false);
 
 
 
@@ -79,41 +31,62 @@ export default function InvestButton({
     <div className="mt-6">
 
 
-      {
-        error && (
-
-          <p className="mb-3 text-sm text-red-600">
-
-            {error}
-
-          </p>
-
-        )
-      }
-
-
-
-
       <button
 
-        onClick={handleInvest}
+        onClick={() => {
 
-        disabled={loading}
+          console.log("INVEST BUTTON CLICKED");
 
-        className="block w-full rounded-lg bg-emerald-700 py-3 text-center text-white hover:bg-emerald-800 disabled:opacity-50"
+          setOpen(true);
+
+        }}
+
+        className="
+        rounded-lg
+        bg-emerald-700
+        px-6
+        py-3
+        font-semibold
+        text-white
+        hover:bg-emerald-800
+        "
 
       >
 
-        {
-          loading
-          ?
-          "Processing..."
-          :
-          "Invest Now"
-        }
+        Invest Now
 
 
       </button>
+
+
+
+
+
+      {
+        open && (
+
+          <InvestmentModal
+
+            propertyId={propertyId}
+
+            minimumInvestment={minimumInvestment}
+
+            propertyName={propertyName}
+
+            location={location}
+
+            onClose={() => {
+
+              console.log("CLOSING MODAL");
+
+              setOpen(false);
+
+            }}
+
+          />
+
+        )
+      }
 
 
 

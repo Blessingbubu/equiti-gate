@@ -195,7 +195,7 @@ export default function ResetPasswordPage() {
 
         <p className="mt-2 text-gray-500">
 
-          Create a new password for your Equiti Gate account.
+          Create a new password for your Equiti Gates account.
 
         </p>
 

@@ -6,8 +6,23 @@ import { revalidatePath } from "next/cache";
 
 
 export async function createInvestment(
+
   propertyId:string,
-  amount:number
+
+  amount:number,
+
+  investmentPlan:string,
+
+  lockPeriodDays:number,
+
+  monthlyRoi:number,
+
+  monthlyProfit:number,
+
+  weeklyProfit:number,
+
+  totalExpectedProfit:number
+
 ){
 
 
@@ -22,6 +37,7 @@ export async function createInvestment(
     data:{
       user
     }
+
   } =
   await supabase.auth.getUser();
 
@@ -40,31 +56,42 @@ export async function createInvestment(
 
 
 
+
   // Get property
 
   const {
-    data:property
+    data:property,
+    error:propertyError
+
   } =
   await supabase
+
     .from("properties")
+
     .select("*")
+
     .eq(
       "id",
       propertyId
     )
+
     .single();
 
 
 
 
 
-  if(!property){
+
+  if(propertyError || !property){
 
     throw new Error(
       "Property not found"
     );
 
   }
+
+
+
 
 
 
@@ -86,11 +113,11 @@ export async function createInvestment(
 
 
 
+
+
   if(
     amount <
-    Number(
-      property.minimum_investment
-    )
+    Number(property.minimum_investment)
   ){
 
     throw new Error(
@@ -104,19 +131,28 @@ export async function createInvestment(
 
 
 
+
+
   // Get wallet
+
 
   const {
     data:wallet
+
   } =
   await supabase
+
     .from("wallets")
+
     .select("*")
+
     .eq(
       "user_id",
       user.id
     )
+
     .single();
+
 
 
 
@@ -140,36 +176,24 @@ export async function createInvestment(
 
 
 
-  const roi =
-    Number(
-      property.expected_roi
+
+
+  const startDate =
+    new Date();
+
+
+
+
+  const maturityDate =
+    new Date(
+      Date.now()
+      +
+      lockPeriodDays *
+      24 *
+      60 *
+      60 *
+      1000
     );
-
-
-
-  const duration =
-    14;
-
-
-
-  const profit =
-    amount *
-    (roi / 100);
-
-
-
-
-  const totalReturn =
-    amount +
-    profit;
-
-
-
-
-
-  const dailyProfit =
-    profit /
-    duration;
 
 
 
@@ -179,12 +203,24 @@ export async function createInvestment(
 
   // Create investment
 
+
+  const {
+    error:investmentError
+
+  } =
   await supabase
+
     .from("investments")
+
     .insert({
+
 
       user_id:
         user.id,
+
+
+      property_id:
+        propertyId,
 
 
       property_name:
@@ -201,7 +237,12 @@ export async function createInvestment(
 
 
       investment_tier:
-        "Standard",
+        investmentPlan,
+
+
+
+      investment_plan:
+        investmentPlan,
 
 
 
@@ -211,40 +252,53 @@ export async function createInvestment(
 
 
       expected_return:
-        `${roi}%`,
+        `${monthlyRoi}% monthly`,
 
 
 
       start_date:
-        new Date().toISOString(),
+        startDate.toISOString(),
 
 
 
       maturity_date:
-        new Date(
-          Date.now()
-          +
-          duration *
-          24 *
-          60 *
-          60 *
-          1000
-        ).toISOString(),
+        maturityDate.toISOString(),
 
 
 
       duration_days:
-        duration,
+        lockPeriodDays,
 
 
 
       roi_percentage:
-        roi,
+        monthlyRoi,
 
 
 
-      daily_profit:
-        dailyProfit,
+      monthly_roi:
+        monthlyRoi,
+
+
+
+      monthly_profit:
+        monthlyProfit,
+
+
+
+      weekly_profit:
+        weeklyProfit,
+
+
+
+      total_expected_profit:
+        totalExpectedProfit,
+
+
+
+      total_return:
+        amount +
+        totalExpectedProfit,
 
 
 
@@ -253,8 +307,31 @@ export async function createInvestment(
 
 
 
-      total_return:
-        totalReturn
+      profit_paid:
+        0,
+
+
+
+      next_profit_date:
+        new Date(
+          Date.now()
+          +
+          7 *
+          24 *
+          60 *
+          60 *
+          1000
+        ).toISOString(),
+
+
+
+      settled:
+        false,
+
+
+
+      principal_status:
+        "Locked"
 
     });
 
@@ -265,10 +342,33 @@ export async function createInvestment(
 
 
 
-  // Deduct wallet
+  if(investmentError){
 
+    throw new Error(
+      investmentError.message
+    );
+
+  }
+
+
+
+
+
+
+
+
+
+  // Deduct wallet balance
+
+
+  const {
+    error:walletError
+
+  } =
   await supabase
+
     .from("wallets")
+
     .update({
 
       balance:
@@ -281,10 +381,24 @@ export async function createInvestment(
         new Date().toISOString()
 
     })
+
     .eq(
       "user_id",
       user.id
     );
+
+
+
+
+
+
+  if(walletError){
+
+    throw new Error(
+      walletError.message
+    );
+
+  }
 
 
 
@@ -296,16 +410,24 @@ export async function createInvestment(
 
   // Update property funding
 
+
+  const {
+    error:propertyUpdateError
+
+  } =
   await supabase
+
     .from("properties")
+
     .update({
 
       amount_raised:
-        Number(property.amount_raised)
+        Number(property.amount_raised || 0)
         +
         amount
 
     })
+
     .eq(
       "id",
       propertyId
@@ -317,9 +439,24 @@ export async function createInvestment(
 
 
 
+  if(propertyUpdateError){
+
+    throw new Error(
+      propertyUpdateError.message
+    );
+
+  }
+
+
+
+
+
+
+
+
 
   revalidatePath("/dashboard");
-  revalidatePath("/properties");
 
+  revalidatePath("/properties");
 
 }

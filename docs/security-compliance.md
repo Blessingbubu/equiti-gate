@@ -1,8 +1,8 @@
-# Equiti Gate Security & Compliance Architecture
+# Equiti Gates Security & Compliance Architecture
 
 ## Overview
 
-Security is a core foundation of Equiti Gate.
+Security is a core foundation of Equiti Gates.
 
 The platform must protect:
 
@@ -212,7 +212,7 @@ The platform requires:
 
 # 11. Compliance Preparation
 
-As Equiti Gate expands globally, the platform should prepare for:
+As Equiti Gates expands globally, the platform should prepare for:
 
 - Financial regulations
 - Investment regulations
