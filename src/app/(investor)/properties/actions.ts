@@ -56,7 +56,6 @@ export async function createInvestment(
 
 
 
-
   // Get property
 
   const {
@@ -81,7 +80,6 @@ export async function createInvestment(
 
 
 
-
   if(propertyError || !property){
 
     throw new Error(
@@ -89,8 +87,6 @@ export async function createInvestment(
     );
 
   }
-
-
 
 
 
@@ -106,8 +102,6 @@ export async function createInvestment(
     );
 
   }
-
-
 
 
 
@@ -132,9 +126,7 @@ export async function createInvestment(
 
 
 
-
   // Get wallet
-
 
   const {
     data:wallet
@@ -176,8 +168,6 @@ export async function createInvestment(
 
 
 
-
-
   const startDate =
     new Date();
 
@@ -203,7 +193,6 @@ export async function createInvestment(
 
   // Create investment
 
-
   const {
     error:investmentError
 
@@ -219,12 +208,10 @@ export async function createInvestment(
         user.id,
 
 
-      property_id:
-        propertyId,
-
 
       property_name:
         property.title,
+
 
 
       location:
@@ -314,6 +301,7 @@ export async function createInvestment(
 
       next_profit_date:
         new Date(
+
           Date.now()
           +
           7 *
@@ -321,6 +309,7 @@ export async function createInvestment(
           60 *
           60 *
           1000
+
         ).toISOString(),
 
 
@@ -333,8 +322,8 @@ export async function createInvestment(
       principal_status:
         "Locked"
 
-    });
 
+    });
 
 
 
@@ -349,8 +338,6 @@ export async function createInvestment(
     );
 
   }
-
-
 
 
 
@@ -392,6 +379,7 @@ export async function createInvestment(
 
 
 
+
   if(walletError){
 
     throw new Error(
@@ -399,8 +387,6 @@ export async function createInvestment(
     );
 
   }
-
-
 
 
 
@@ -446,8 +432,6 @@ export async function createInvestment(
     );
 
   }
-
-
 
 
 
